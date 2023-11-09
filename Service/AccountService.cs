@@ -60,7 +60,6 @@ namespace bookingtaxi_backend.Service
             }
 
         }
-
         private async Task<Account?> GetAccount(string id) => await _accounts.Find(x => x.Id.ToString() == id && x.Deleted != true).FirstOrDefaultAsync();
         public async Task RemoveAccount(string id)
         {

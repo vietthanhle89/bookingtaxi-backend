@@ -25,14 +25,61 @@ namespace bookingtaxi_backend.Service
             _carTypes = mongoDatabase.GetCollection<CarType>(settings.Value.CarTypeCollectionName);
         }
 
+        public async Task DeleteDocumentation(string id)
+        {
+            try
+            {
+                await _documentationImages.DeleteOneAsync(x => x.Id.ToString() == id);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+        }
+
+        public async Task<DocumentationImage?> CreateDocumentationImage(DocumentationImage obj)
+        {         
+            await _documentationImages.InsertOneAsync(obj);
+            return obj;
+        }
+
+        public async Task<List<DocumentationImage>> GetAllDocumentationImages(string driverID)
+        {
+            return await _documentationImages.Find(x => x.DriverID.ToString() == driverID).ToListAsync();
+        }
+
+        public async Task<DocumentationImage> GetDocumentationImage(string id)
+        {
+            return await _documentationImages.Find(x => x.Id.ToString() == id).FirstOrDefaultAsync();
+        }
+
+        //Driver Car
+        public async Task<DriverCar> GetDriverCar(string driverID)
+        {
+            return await _driverCars.Find(x => x.DriverID.ToString() == driverID).FirstOrDefaultAsync();
+        }
+
+        public async Task DeleteDriverCar(string driverID)
+        {
+            var obj = await GetDriverCar(driverID);
+            obj.Deleted = true;
+            await UpdateDriverCar(obj);
+        }
+
+        public async Task UpdateDriverCar(DriverCar obj)
+        {
+            await _driverCars.ReplaceOneAsync(x => x.Id.ToString() == obj.Id, obj);
+        }
+
+        public async Task<DriverCar?> CreateDriverCar(DriverCar obj)
+        {
+            await _driverCars.InsertOneAsync(obj);
+            return obj;
+        }
 
 
 
 
 
-
-
-
-        
     }
 }

@@ -86,8 +86,6 @@ namespace bookingtaxi_backend.Controller
             return await _accountService.GetAdministrator(id);
         }
 
-
-
         //Supporter
         [Authorize]
         [RoleClaimRequires(new string[] { IdentityData.AdminAccountRoleClaimValue })]
@@ -138,7 +136,6 @@ namespace bookingtaxi_backend.Controller
         {
             return await _accountService.GetSupporter(id);
         }
-
 
         //Driver
         [HttpPost("Driver")]
