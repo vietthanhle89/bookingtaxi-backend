@@ -7,5 +7,7 @@
         public string DatabaseName { get; set; } = null!;
 
         public string RoleCollectionName { get; set; } = null!;
+        public string AccountCollectionName { get; set; } = null!;
+        
     }
 }
