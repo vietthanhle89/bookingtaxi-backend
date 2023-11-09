@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace bookingtaxi_backend.Models
+namespace bookingtaxi_backend.Model
 {
     [BsonIgnoreExtraElements]
     public class Role

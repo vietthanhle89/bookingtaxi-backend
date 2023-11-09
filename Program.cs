@@ -6,7 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
-
+using bookingtaxi_backend.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
@@ -19,6 +19,11 @@ builder.Services.AddCors(c =>
 // Add services to the container
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
+
+// Add all necessary services
+builder.Services.AddSingleton<AccountService>();
+builder.Services.AddSingleton<EmailService>();
+builder.Services.AddSingleton<DriverPropertiesService>();
 
 
 builder.Services.AddAuthentication(x => {
