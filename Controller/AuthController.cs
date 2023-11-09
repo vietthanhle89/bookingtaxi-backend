@@ -38,7 +38,7 @@ namespace bookingtaxi_backend.Controller
             {
                 Subject = new ClaimsIdentity(new[] {
                 new Claim("ID", account.Id),
-                new Claim("Role", role!.Name),
+                new Claim(IdentityData.AccountRoleClaimName, role!.Name),
                 new Claim(JwtRegisteredClaimNames.Sub, account.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToUniversalTime().ToString())

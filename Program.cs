@@ -20,7 +20,11 @@ builder.Services.AddCors(c =>
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 
+// Add all necessary services
 builder.Services.AddSingleton<AccountService>();
+builder.Services.AddSingleton<EmailService>();
+
+
 
 builder.Services.AddAuthentication(x => {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

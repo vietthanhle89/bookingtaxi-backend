@@ -27,6 +27,32 @@ namespace bookingtaxi_backend.Model
         public bool Deleted { get; set; }
         public DateTime CreatedDate { get; set; }
     }
+
+    public class Driver:Account
+    {
+        public string Phone { get; set; } = null!;
+        public string Gender { get; set; } = null!;
+        public string Address { get; set; } = null!;
+        public string NationalID { get; set; } = null!;
+        public string? DriverStatusID { get; set; } = null!;
+        public bool Approved { get; set; }
+    }
+
+    public class Administrator : Account
+    {
+
+    }
+
+    public class Customer : Account
+    {
+        public string Phone { get; set; } = null!;
+        public string Gender { get; set; } = null!;
+        public string Address { get; set; } = null!;
+    }
+
+    public class Supporter : Account
+    { }
+
 }
 
 
