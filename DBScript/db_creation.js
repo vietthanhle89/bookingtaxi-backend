@@ -9,6 +9,9 @@ db.createCollection('Customer');
 db.createCollection('Administrator');
 db.createCollection('Supporter');
 
+db.createCollection('DocumentationImage');
+db.createCollection('DriverCar');
+db.createCollection('CarType');
 
 
 db.Role.insertMany([
@@ -51,6 +54,21 @@ db.DriverStatus.insertMany([
         "Deleted": false
     }
 ])
+
+db.CarType.insertMany([
+    {
+        "_id": ObjectId("000000000000000000000001"),
+        "Name": "4-seat car",
+        "PricePerKm": 11000
+    },
+    {
+        "_id": ObjectId("000000000000000000000002"),
+        "Name": "7-seat car",
+        "PricePerKm": 12500
+    }
+])
+
+
 
 db.Account.insertMany([
     {

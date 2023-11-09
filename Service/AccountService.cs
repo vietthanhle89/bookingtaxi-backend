@@ -32,8 +32,6 @@ namespace bookingtaxi_backend.Service
             return await _accounts.Find(x => x.Email == email && x.Password == password && x.Deleted != true).FirstOrDefaultAsync();
         }
 
-        public async Task<Role?> GetRole(string id) => await _roles.Find(x => x.Id.ToString() == id && x.Deleted != true).FirstOrDefaultAsync();
-
         public async Task<DriverStatus?> GetDriverStatus(string id) => await _driverStatus.Find(x => x.Id.ToString() == id && x.Deleted != true).FirstOrDefaultAsync();
 
         //Account
@@ -135,7 +133,6 @@ namespace bookingtaxi_backend.Service
                 await UpdateDriver(driver);
             }
         }
-
         
         //Customer
         public async Task<List<Customer>> GetAllCustomers()
@@ -187,6 +184,31 @@ namespace bookingtaxi_backend.Service
                 Debug.WriteLine(ex);
             }
         }
-        
+
+        //Role
+        public async Task DeleteRole(string id)
+        {
+            try
+            {
+                await _roles.DeleteOneAsync(x => x.Id.ToString() == id);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+        }
+        public async Task<Role?> CreateCarType(Role obj)
+        {
+            await _roles.InsertOneAsync(obj);
+            return obj;
+        }
+        public async Task<List<Role>> GetAllRoles()
+        {
+            return await _roles.Find(x => x.Id != null).ToListAsync();
+        }
+        public async Task<Role> GetRole(string id)
+        {
+            return await _roles.Find(x => x.Id.ToString() == id).FirstOrDefaultAsync();
+        }
     }
 }

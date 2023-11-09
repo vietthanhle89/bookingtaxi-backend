@@ -78,6 +78,36 @@ namespace bookingtaxi_backend.Service
         }
 
 
+        //Car Type
+
+        public async Task DeleteCarType(string id)
+        {
+            try
+            {
+                await _carTypes.DeleteOneAsync(x => x.Id.ToString() == id);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+        }
+
+        public async Task<CarType?> CreateCarType(CarType obj)
+        {
+            await _carTypes.InsertOneAsync(obj);
+            return obj;
+        }
+
+        public async Task<List<CarType>> GetAllCarTypes()
+        {
+            var cartypes = await _carTypes.Find(x => x.Name != "").ToListAsync();
+            return cartypes;
+        }
+
+        public async Task<CarType> GetCarType(string id)
+        {
+            return await _carTypes.Find(x => x.Id.ToString() == id).FirstOrDefaultAsync();
+        }
 
 
 

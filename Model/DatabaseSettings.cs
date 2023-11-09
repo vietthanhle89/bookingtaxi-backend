@@ -12,5 +12,9 @@
         public string DriverCarCollectionName { get; set; } = null!;
         public string CarTypeCollectionName { get; set; } = null!;
 
+        public string BookingCollectionName { get; set; } = null!;
+        public string BookingStatusCollectionName { get; set; } = null!;
+        public string BookingAssignationCollectionName { get; set; } = null!;
+
     }
 }

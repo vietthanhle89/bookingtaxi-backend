@@ -270,5 +270,35 @@ namespace bookingtaxi_backend.Controller
             return await _accountService.GetCustomer(id);
         }
 
+
+        [Authorize]
+        [HttpPost("Role")]
+        public async Task<IActionResult> PostRole(Role obj)
+        {
+            Role createdObj = await _accountService.CreateCarType(obj);
+            return CreatedAtAction("PostRole", createdObj);
+        }
+
+        [Authorize]
+        [HttpDelete("Role")]
+        public async Task<IActionResult> DeleteCarType(String id)
+        {
+            await _accountService.DeleteRole(id);
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpGet("GetAllRoles")]
+        public async Task<List<Role>> GetAllRoles()
+        {
+            return await _accountService.GetAllRoles();
+        }
+
+        [Authorize]
+        [HttpGet("Role")]
+        public async Task<Role?> GetRolee(string id)
+        {
+            return await _accountService.GetRole(id);
+        }
     }
 }

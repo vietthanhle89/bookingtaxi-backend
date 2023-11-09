@@ -76,5 +76,36 @@ namespace bookingtaxi_backend.Controller
             await _driverPropertiesServices.UpdateDriverCar(obj);
             return Ok();
         }
+
+        [Authorize]
+        [HttpPost("CarType")]
+        public async Task<IActionResult> PostCarType(CarType obj)
+        {
+            CarType createdObj = await _driverPropertiesServices.CreateCarType(obj);
+            return CreatedAtAction("PostCarType", createdObj);
+        }
+
+        [Authorize]
+        [HttpDelete("CarType")]
+        public async Task<IActionResult> DeleteCarType(String id)
+        {
+            await _driverPropertiesServices.DeleteCarType(id);
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpGet("GetAllCarTypes")]
+        public async Task<List<CarType>> GetAllCarTypes()
+        {
+            return await _driverPropertiesServices.GetAllCarTypes();
+        }
+
+        [Authorize]
+        [HttpGet("CarType")]
+        public async Task<CarType?> GetCarType(string id)
+        {
+            return await _driverPropertiesServices.GetCarType(id);
+        }
+
     }
 }

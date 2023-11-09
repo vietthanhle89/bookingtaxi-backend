@@ -23,7 +23,7 @@ builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSet
 // Add all necessary services
 builder.Services.AddSingleton<AccountService>();
 builder.Services.AddSingleton<EmailService>();
-
+builder.Services.AddSingleton<DriverPropertiesService>();
 
 
 builder.Services.AddAuthentication(x => {
