@@ -12,11 +12,11 @@ namespace bookingtaxi_backend.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthenticateController : ControllerBase
+    public class AuthenticationController : ControllerBase
     {
         private readonly AccountService _accountService;
         private readonly IOptions<JwtSettings> _jwtSettings;
-        public AuthenticateController(AccountService service, IOptions<JwtSettings> jwtSettings) { _accountService = service; _jwtSettings = jwtSettings; }
+        public AuthenticationController(AccountService service, IOptions<JwtSettings> jwtSettings) { _accountService = service; _jwtSettings = jwtSettings; }
 
         [HttpPost("")]
         public async Task<IActionResult> GenerateToken([FromBody] AuthRequest request)

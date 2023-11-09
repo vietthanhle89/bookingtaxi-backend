@@ -13,6 +13,10 @@ db.createCollection('DocumentationImage');
 db.createCollection('DriverCar');
 db.createCollection('CarType');
 
+db.createCollection('Booking');
+db.createCollection('BookingAssignation');
+db.createCollection('BookingStatus');
+
 
 db.Role.insertMany([
     {
@@ -68,7 +72,28 @@ db.CarType.insertMany([
     }
 ])
 
-
+db.BookingStatus.insertMany([
+    {
+        "_id": ObjectId("000000000000000000000001"),
+        "Name": "WAITING",
+    },
+    {
+        "_id": ObjectId("000000000000000000000002"),
+        "Name": "CONNECTED"
+    },
+    {
+        "_id": ObjectId("000000000000000000000003"),
+        "Name": "CANCELLED"
+    },
+    {
+        "_id": ObjectId("000000000000000000000004"),
+        "Name": "ON_THE_GO"
+    },
+    {
+        "_id": ObjectId("000000000000000000000005"),
+        "Name": "COMPLETED"
+    }
+])
 
 db.Account.insertMany([
     {

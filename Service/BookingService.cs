@@ -31,7 +31,6 @@ namespace bookingtaxi_backend.Service
         {
             return await _booking.Find(x => x.Deleted != true && x.CustomerID == customerID ).ToListAsync();
         }
-        
         public async Task<Booking?> GetBooking(string id) => await _booking.Find(x => x.Id.ToString() == id && x.Deleted != true).FirstOrDefaultAsync();
         public async Task<Booking?> CreateBooking(Booking obj)
         {

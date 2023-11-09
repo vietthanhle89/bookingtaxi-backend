@@ -1646,19 +1646,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\thanh.viet.le\\.nuget\\packages\\": {}
+    "C:\\Users\\viett\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Mine\\BookingTaxi\\backend\\bookingtaxi-backend\\bookingtaxi-backend.csproj",
+      "projectUniqueName": "D:\\Study\\BookingTaxi\\bookingtaxi-backend\\bookingtaxi-backend\\bookingtaxi-backend.csproj",
       "projectName": "bookingtaxi-backend",
-      "projectPath": "F:\\Mine\\BookingTaxi\\backend\\bookingtaxi-backend\\bookingtaxi-backend.csproj",
-      "packagesPath": "C:\\Users\\thanh.viet.le\\.nuget\\packages\\",
-      "outputPath": "F:\\Mine\\BookingTaxi\\backend\\bookingtaxi-backend\\obj\\",
+      "projectPath": "D:\\Study\\BookingTaxi\\bookingtaxi-backend\\bookingtaxi-backend\\bookingtaxi-backend.csproj",
+      "packagesPath": "C:\\Users\\viett\\.nuget\\packages\\",
+      "outputPath": "D:\\Study\\BookingTaxi\\bookingtaxi-backend\\bookingtaxi-backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\thanh.viet.le\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\viett\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1720,7 +1720,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }
