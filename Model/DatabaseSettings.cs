@@ -8,6 +8,9 @@
 
         public string RoleCollectionName { get; set; } = null!;
         public string AccountCollectionName { get; set; } = null!;
-        
+        public string DocumentationImageCollectionName { get; set; } = null!;
+        public string DriverCarCollectionName { get; set; } = null!;
+        public string CarTypeCollectionName { get; set; } = null!;
+
     }
 }

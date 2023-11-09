@@ -41,7 +41,7 @@ namespace bookingtaxi_backend.Controller
         [HttpPut("Administrator")]
         public async Task<IActionResult> UpdateMemberAccount(Administrator account)
         {
-            var obj = await _accountService.GetAccount(account.Id);
+            var obj = await _accountService.GetAdministrator(account.Id);
 
             if (obj is null)
             {
@@ -58,7 +58,7 @@ namespace bookingtaxi_backend.Controller
         [HttpDelete("")]
         public async Task<IActionResult> DeleteAccount(String id)
         {
-            var obj = await _accountService.GetAccount(id);
+            var obj = await _accountService.GetAdministrator(id);
 
             if (obj is null)
             {
@@ -69,6 +69,24 @@ namespace bookingtaxi_backend.Controller
 
             return Ok();
         }
+
+        [Authorize]
+        [RoleClaimRequires(new string[] { IdentityData.AdminAccountRoleClaimValue })]
+        [HttpGet("GetAllAdministrators")]
+        public async Task<List<Account>> GetAllAdministrators()
+        {
+            return await _accountService.GetAllAdministrators();
+        }
+
+        [Authorize]
+        [RoleClaimRequires(new string[] { IdentityData.AdminAccountRoleClaimValue })]
+        [HttpGet("GetAdministrator")]
+        public async Task<Account?> GetAdministrator(string id)
+        {
+            return await _accountService.GetAdministrator(id);
+        }
+
+
 
         //Supporter
         [Authorize]
@@ -93,7 +111,7 @@ namespace bookingtaxi_backend.Controller
         [HttpPut("Supporter")]
         public async Task<IActionResult> UpdateSupporter(Supporter account)
         {
-            var obj = await _accountService.GetAccount(account.Id);
+            var obj = await _accountService.GetSupporter(account.Id);
 
             if (obj is null)
             {
@@ -104,6 +122,23 @@ namespace bookingtaxi_backend.Controller
 
             return Ok();
         }
+
+        [Authorize]
+        [RoleClaimRequires(new string[] { IdentityData.AdminAccountRoleClaimValue })]
+        [HttpGet("GetAllSupporters")]
+        public async Task<List<Account>> GetAllSupporters()
+        {
+            return await _accountService.GetAllSupporters();
+        }
+
+        [Authorize]
+        [RoleClaimRequires(new string[] { IdentityData.AdminAccountRoleClaimValue })]
+        [HttpGet("GetSupporter")]
+        public async Task<Account?> GetSupporter(string id)
+        {
+            return await _accountService.GetSupporter(id);
+        }
+
 
         //Driver
         [HttpPost("Driver")]
@@ -126,7 +161,7 @@ namespace bookingtaxi_backend.Controller
         [HttpPut("Driver")]
         public async Task<IActionResult> UpdateDriver(Driver account)
         {
-            var obj = await _accountService.GetAccount(account.Id);
+            var obj = await _accountService.GetDriver(account.Id);
 
             if (obj is null)
             {
@@ -143,7 +178,7 @@ namespace bookingtaxi_backend.Controller
         [HttpPost("ChangeDriverStatus")]
         public async Task<IActionResult> ChangeDriverStatus(string accountID, string driverStatusID)
         {
-            var obj = await _accountService.GetAccount(accountID);
+            var obj = await _accountService.GetDriver(accountID);
 
             if (obj is null)
             {
@@ -160,7 +195,7 @@ namespace bookingtaxi_backend.Controller
         [HttpPost("ApproveDriver")]
         public async Task<IActionResult> ApproveDriver(string accountID)
         {
-            var obj = await _accountService.GetAccount(accountID);
+            var obj = await _accountService.GetDriver(accountID);
 
             if (obj is null)
             {
@@ -170,6 +205,22 @@ namespace bookingtaxi_backend.Controller
             await _accountService.ApproveDriver(accountID);
 
             return Ok();
+        }
+
+        [Authorize]
+        [RoleClaimRequires(new string[] { IdentityData.AdminAccountRoleClaimValue })]
+        [HttpGet("GetAllDrivers")]
+        public async Task<List<Driver>> GetAllDrivers()
+        {
+            return await _accountService.GetAllDrivers();
+        }
+
+        [Authorize]
+        [RoleClaimRequires(new string[] { IdentityData.AdminAccountRoleClaimValue, IdentityData.DriverAccountRoleClaimValue })]
+        [HttpGet("GetDriver")]
+        public async Task<Driver?> GetDriver(string id)
+        {
+            return await _accountService.GetDriver(id);
         }
 
 
@@ -194,7 +245,7 @@ namespace bookingtaxi_backend.Controller
         [HttpPut("Customer")]
         public async Task<IActionResult> UpdateCustomer(Customer account)
         {
-            var obj = await _accountService.GetAccount(account.Id);
+            var obj = await _accountService.GetCustomer(account.Id);
 
             if (obj is null)
             {
@@ -204,6 +255,22 @@ namespace bookingtaxi_backend.Controller
             await _accountService.UpdateCustomer(account);
 
             return Ok();
+        }
+
+        [Authorize]
+        [RoleClaimRequires(new string[] { IdentityData.AdminAccountRoleClaimValue })]
+        [HttpGet("GetAllCustomers")]
+        public async Task<List<Customer>> GetAllCustomers()
+        {
+            return await _accountService.GetAllCustomers();
+        }
+
+        [Authorize]
+        [RoleClaimRequires(new string[] { IdentityData.AdminAccountRoleClaimValue, IdentityData.CustomerAccountRoleClaimValue })]
+        [HttpGet("GetCustomer")]
+        public async Task<Customer?> GetCustomer(string id)
+        {
+            return await _accountService.GetCustomer(id);
         }
 
     }
