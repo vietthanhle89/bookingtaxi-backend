@@ -11,6 +11,8 @@ namespace bookingtaxi_backend.Service
         private readonly IMongoCollection<Booking> _booking;
         private readonly IMongoCollection<BookingStatus> _bookingStatus;
         private readonly IMongoCollection<BookingAssignation> _bookingAssignations;
+        private readonly IMongoCollection<TripRecord> _tripRecords;
+
 
         public BookingService(IOptions<DatabaseSettings> settings)
         {
@@ -20,6 +22,7 @@ namespace bookingtaxi_backend.Service
             _booking = mongoDatabase.GetCollection<Booking>(settings.Value.BookingCollectionName);
             _bookingStatus = mongoDatabase.GetCollection<BookingStatus>(settings.Value.BookingStatusCollectionName);
             _bookingAssignations = mongoDatabase.GetCollection<BookingAssignation>(settings.Value.BookingAssignationCollectionName);
+            _tripRecords = mongoDatabase.GetCollection<TripRecord>(settings.Value.BookingAssignationCollectionName);
         }
 
         //Booking
@@ -126,5 +129,33 @@ namespace bookingtaxi_backend.Service
         {
             return await _bookingStatus.Find(x => x.Id.ToString() == id).FirstOrDefaultAsync();
         }
+
+        //TripRecord
+        public async Task DeleteTripRecord(string id)
+        {
+            try
+            {
+                await _tripRecords.DeleteOneAsync(x => x.Id.ToString() == id);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+        }
+        public async Task<TripRecord?> CreateTripRecord(TripRecord obj)
+        {
+            await _tripRecords.InsertOneAsync(obj);
+            return obj;
+        }
+        public async Task<List<TripRecord>> GetAlTripRecords(string bookingID)
+        {
+            return await _tripRecords.Find(x => x.BookingID == bookingID).ToListAsync();
+        }
+
+        public async Task<TripRecord> GetTripRecord(string id)
+        {
+            return await _tripRecords.Find(x => x.Id == id).FirstOrDefaultAsync();
+        }
+
     }
 }

@@ -157,3 +157,7 @@ F:\Mine\BookingTaxi\backend\bookingtaxi-backend\obj\Debug\net7.0\scopedcss\bundl
 F:\Mine\BookingTaxi\backend\bookingtaxi-backend\obj\Debug\net7.0\bookingtaxi-backend.csproj.CopyComplete
 F:\Mine\BookingTaxi\backend\bookingtaxi-backend\obj\Debug\net7.0\bookingtaxi-backend.genruntimeconfig.cache
 F:\Mine\BookingTaxi\backend\bookingtaxi-backend\obj\Debug\net7.0\ref\bookingtaxi-backend.dll
+F:\Mine\BookingTaxi\backend\bookingtaxi-backend\bin\Debug\net7.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+F:\Mine\BookingTaxi\backend\bookingtaxi-backend\bin\Debug\net7.0\Microsoft.AspNetCore.SignalR.Common.dll
+F:\Mine\BookingTaxi\backend\bookingtaxi-backend\bin\Debug\net7.0\Microsoft.Extensions.Features.dll
+F:\Mine\BookingTaxi\backend\bookingtaxi-backend\bin\Debug\net7.0\Microsoft.Extensions.Options.dll

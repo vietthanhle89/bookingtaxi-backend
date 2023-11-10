@@ -16,7 +16,7 @@ namespace bookingtaxi_backend.Controller;
 public class FileController : ControllerBase
 {
     // string path = "..\\Files\\Images";
-    string path =  String.Format("..{0}Files{0}Images", Path.DirectorySeparatorChar);
+    string path =  String.Format("Files{0}Images", Path.DirectorySeparatorChar);
 
     [Authorize]
     [HttpPost("ImageUpload")]

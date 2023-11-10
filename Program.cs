@@ -7,6 +7,8 @@ using System.Text;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using bookingtaxi_backend.Service;
+using MongoDB.Driver;
+using bookingtaxi_backend.BookingHub;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
@@ -24,6 +26,9 @@ builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSet
 builder.Services.AddSingleton<AccountService>();
 builder.Services.AddSingleton<EmailService>();
 builder.Services.AddSingleton<DriverPropertiesService>();
+
+//Realtime communication
+builder.Services.AddSignalR();
 
 
 builder.Services.AddAuthentication(x => {
@@ -65,10 +70,9 @@ if (app.Environment.IsDevelopment())
 app.UseCors(options => { options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); });
 
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapHub<TripMonitorHub>("/trip-monitoring");
 
 app.Run();

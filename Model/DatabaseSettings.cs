@@ -15,6 +15,7 @@
         public string BookingCollectionName { get; set; } = null!;
         public string BookingStatusCollectionName { get; set; } = null!;
         public string BookingAssignationCollectionName { get; set; } = null!;
+        public string TripRecordCollectionName { get; set; } = null!;
 
     }
 }
