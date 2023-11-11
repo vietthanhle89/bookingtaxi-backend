@@ -161,3 +161,7 @@ F:\Mine\BookingTaxi\backend\bookingtaxi-backend\bin\Debug\net7.0\Microsoft.AspNe
 F:\Mine\BookingTaxi\backend\bookingtaxi-backend\bin\Debug\net7.0\Microsoft.AspNetCore.SignalR.Common.dll
 F:\Mine\BookingTaxi\backend\bookingtaxi-backend\bin\Debug\net7.0\Microsoft.Extensions.Features.dll
 F:\Mine\BookingTaxi\backend\bookingtaxi-backend\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
+D:\Study\BookingTaxi\bookingtaxi-backend\bookingtaxi-backend\bin\Debug\net7.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+D:\Study\BookingTaxi\bookingtaxi-backend\bookingtaxi-backend\bin\Debug\net7.0\Microsoft.AspNetCore.SignalR.Common.dll
+D:\Study\BookingTaxi\bookingtaxi-backend\bookingtaxi-backend\bin\Debug\net7.0\Microsoft.Extensions.Features.dll
+D:\Study\BookingTaxi\bookingtaxi-backend\bookingtaxi-backend\bin\Debug\net7.0\Microsoft.Extensions.Options.dll

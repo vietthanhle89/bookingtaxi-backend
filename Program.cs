@@ -72,6 +72,8 @@ app.UseCors(options => { options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeade
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapControllers();
+
 
 app.MapHub<TripMonitorHub>("/trip-monitoring");
 
