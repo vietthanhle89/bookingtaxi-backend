@@ -1,6 +1,6 @@
 ﻿db = connect("mongodb://localhost:27017/BookingTaxi");
 
-
+db.dropDatabase('BookingTaxi');
 db.createCollection('Role');
 db.createCollection('DriverStatus');
 db.createCollection('Account');
@@ -103,7 +103,7 @@ db.Account.insertMany([
         "GivenName": "Elsa",
         "LastName": "Tran",
         "RoleID": "000000000000000000000001",
-        "ProfileImage": "000000000000000000000001.png",
+        "ProfileImage": "000000000000000000000001.jpg",
         "Deleted": false,
         "CreatedDate": "2023-11-09"
     },
@@ -114,7 +114,7 @@ db.Account.insertMany([
         "GivenName": "Elsa",
         "LastName": "Tran",
         "RoleID": "000000000000000000000002",
-        "ProfileImage": "000000000000000000000002.png",
+        "ProfileImage": "000000000000000000000002.jpg",
         "Deleted": false,
         "CreatedDate": "2023-11-09"
     },
@@ -125,7 +125,7 @@ db.Account.insertMany([
         "GivenName": "Elsa",
         "LastName": "Tran",
         "RoleID": "000000000000000000000003",
-        "ProfileImage": "000000000000000000000003.png",
+        "ProfileImage": "000000000000000000000003.jpg",
         "Deleted": false,
         "CreatedDate": "2023-11-09"
     },
@@ -136,7 +136,7 @@ db.Account.insertMany([
         "GivenName": "Elsa",
         "LastName": "Tran",
         "RoleID": "000000000000000000000004",
-        "ProfileImage": "000000000000000000000004.png",
+        "ProfileImage": "000000000000000000000004.jpg",
         "Deleted": false,
         "CreatedDate": "2023-11-09"
     }

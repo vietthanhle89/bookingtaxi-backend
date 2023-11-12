@@ -18,7 +18,6 @@ namespace bookingtaxi_backend.Model
         public string Id { get; set; } = null!;
 
         public string Email { get; set; } = null!;
-        //[JsonIgnore]
         public string Password { get; set; } = null!;
         public string GivenName { get; set; } = null!;
         public string LastName { get; set; } = null!;
