@@ -2,6 +2,7 @@
 using bookingtaxi_backend.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace bookingtaxi_backend.Controller
 {
@@ -39,7 +40,7 @@ namespace bookingtaxi_backend.Controller
         [Authorize]
         [RoleClaimRequires(new string[] { IdentityData.AdminAccountRoleClaimValue })]
         [HttpPut("Administrator")]
-        public async Task<IActionResult> UpdateAdministratorAccount(Account account)
+        public async Task<IActionResult> UpdateAdministratorAccount(Administrator account)
         {
             var obj = await _accountService.GetAdministrator(account.Id);
 
@@ -55,7 +56,7 @@ namespace bookingtaxi_backend.Controller
 
         [Authorize]
         [RoleClaimRequires(new string[] { IdentityData.AdminAccountRoleClaimValue })]
-        [HttpDelete("")]
+        [HttpDelete("Administrator")]
         public async Task<IActionResult> DeleteAccount(String id)
         {
             var obj = await _accountService.GetAdministrator(id);
@@ -75,7 +76,19 @@ namespace bookingtaxi_backend.Controller
         [HttpGet("GetAllAdministrators")]
         public async Task<List<Account>> GetAllAdministrators()
         {
-            return await _accountService.GetAllAdministrators();
+            List<Account> accs = new List<Account>();
+
+            try
+            {
+                accs = await _accountService.GetAllAdministrators();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            return accs;
+            
         }
 
         [Authorize]
@@ -105,7 +118,7 @@ namespace bookingtaxi_backend.Controller
         }
 
         [Authorize]
-        [RoleClaimRequires(new string[] { IdentityData.SupporterAccountRoleClaimValue })]
+        [RoleClaimRequires(new string[] { IdentityData.AdminAccountRoleClaimValue, IdentityData.SupporterAccountRoleClaimValue })]
         [HttpPut("Supporter")]
         public async Task<IActionResult> UpdateSupporter(Supporter account)
         {
@@ -126,15 +139,43 @@ namespace bookingtaxi_backend.Controller
         [HttpGet("GetAllSupporters")]
         public async Task<List<Account>> GetAllSupporters()
         {
-            return await _accountService.GetAllSupporters();
+            List<Account> accs = new List<Account>();
+
+            try
+            {
+                accs = await _accountService.GetAllSupporters();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            return accs;
         }
 
         [Authorize]
-        [RoleClaimRequires(new string[] { IdentityData.AdminAccountRoleClaimValue })]
+        [RoleClaimRequires(new string[] { IdentityData.AdminAccountRoleClaimValue, IdentityData.SupporterAccountRoleClaimValue })]
         [HttpGet("GetSupporter")]
         public async Task<Account?> GetSupporter(string id)
         {
             return await _accountService.GetSupporter(id);
+        }
+
+        [Authorize]
+        [RoleClaimRequires(new string[] { IdentityData.AdminAccountRoleClaimValue })]
+        [HttpDelete("Supporter")]
+        public async Task<IActionResult> DeleteSupporter(String id)
+        {
+            var obj = await _accountService.GetAccount(id);
+
+            if (obj is null)
+            {
+                return NotFound();
+            }
+
+            await _accountService.RemoveAccount(id);
+
+            return Ok();
         }
 
         //Driver
@@ -190,7 +231,7 @@ namespace bookingtaxi_backend.Controller
         [Authorize]
         [RoleClaimRequires(new string[] { IdentityData.AdminAccountRoleClaimValue })]
         [HttpPost("ApproveDriver")]
-        public async Task<IActionResult> ApproveDriver(string accountID)
+        public async Task<IActionResult> ApproveDriver(string accountID, bool approval)
         {
             var obj = await _accountService.GetDriver(accountID);
 
@@ -199,7 +240,7 @@ namespace bookingtaxi_backend.Controller
                 return NotFound();
             }
 
-            await _accountService.ApproveDriver(accountID);
+            await _accountService.ApproveDriver(accountID, approval);
 
             return Ok();
         }

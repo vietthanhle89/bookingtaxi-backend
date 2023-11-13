@@ -103,9 +103,15 @@ db.Account.insertMany([
         "GivenName": "Elsa",
         "LastName": "Tran",
         "RoleID": "000000000000000000000001",
-        "ProfileImage": "000000000000000000000001.jpg",
+        "ProfileImage": "profile_image.png",
         "Deleted": false,
-        "CreatedDate": "2023-11-09"
+        "CreatedDate": "2023-11-09",
+        "Phone": "0765088879",
+        "Gender": "Male",
+        "Address": "133 Hoàng Văn Thụ, Quận Tân Bình, TP.HCM",
+        "NationalID": "079088012345",
+        "DriverStatusID": "",
+        "Approved": false
     },
     {
         "_id": ObjectId("000000000000000000000002"),
@@ -114,7 +120,7 @@ db.Account.insertMany([
         "GivenName": "Elsa",
         "LastName": "Tran",
         "RoleID": "000000000000000000000002",
-        "ProfileImage": "000000000000000000000002.jpg",
+        "ProfileImage": "profile_image.png",
         "Deleted": false,
         "CreatedDate": "2023-11-09"
     },
@@ -125,7 +131,7 @@ db.Account.insertMany([
         "GivenName": "Elsa",
         "LastName": "Tran",
         "RoleID": "000000000000000000000003",
-        "ProfileImage": "000000000000000000000003.jpg",
+        "ProfileImage": "profile_image.png",
         "Deleted": false,
         "CreatedDate": "2023-11-09"
     },
@@ -136,7 +142,7 @@ db.Account.insertMany([
         "GivenName": "Elsa",
         "LastName": "Tran",
         "RoleID": "000000000000000000000004",
-        "ProfileImage": "000000000000000000000004.jpg",
+        "ProfileImage": "profile_image.png",
         "Deleted": false,
         "CreatedDate": "2023-11-09"
     }

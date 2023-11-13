@@ -20,11 +20,9 @@ namespace bookingtaxi_backend.Service
             var mongoDatabase = mongoClient.GetDatabase(settings.Value.DatabaseName);
 
             _roles = mongoDatabase.GetCollection<Role>(settings.Value.RoleCollectionName);
-            _accounts = mongoDatabase.GetCollection<Account>(settings.Value.AccountCollectionName);
             _drivers = mongoDatabase.GetCollection<Driver>(settings.Value.AccountCollectionName);
             _customers = mongoDatabase.GetCollection<Customer>(settings.Value.AccountCollectionName);
-
-
+            _accounts = mongoDatabase.GetCollection<Account>(settings.Value.AccountCollectionName);
         }
 
         public async Task<Account?> GetAccountByCredentials(string email, string password)
@@ -58,7 +56,7 @@ namespace bookingtaxi_backend.Service
             }
 
         }
-        private async Task<Account?> GetAccount(string id) => await _accounts.Find(x => x.Id.ToString() == id && x.Deleted != true).FirstOrDefaultAsync();
+        public async Task<Account?> GetAccount(string id) => await _accounts.Find(x => x.Id.ToString() == id && x.Deleted != true).FirstOrDefaultAsync();
         public async Task RemoveAccount(string id)
         {
             var obj = await GetAccount(id);
@@ -75,7 +73,7 @@ namespace bookingtaxi_backend.Service
             await _accounts.InsertOneAsync(obj);
             return (Administrator?)obj;
         }
-        public async Task UpdateAdministrator(Account obj) {
+        public async Task UpdateAdministrator(Administrator obj) {
             try
             {
                 await _accounts.ReplaceOneAsync(x => x.Id.ToString() == obj.Id, obj);
@@ -88,6 +86,32 @@ namespace bookingtaxi_backend.Service
         public async Task<List<Account>> GetAllAdministrators() => await _accounts.Find(x => x.Deleted != true && x.RoleID.ToString() == ROLEID.ADMIN).ToListAsync();
         public async Task<Account?> GetAdministrator(string id) => await _accounts.Find(x => x.Id.ToString() == id && x.Deleted != true && x.RoleID.ToString() == ROLEID.ADMIN).FirstOrDefaultAsync();
         public async Task<Account?> GetAdministrator(string username, string password) => await _accounts.Find(x => x.Email == username && x.Password == password && x.RoleID.ToString() == ROLEID.ADMIN && x.Deleted != true).FirstOrDefaultAsync();
+
+
+        //Supporter
+        public async Task<List<Account>> GetAllSupporters() => await _accounts.Find(x => x.Deleted != true && x.RoleID.ToString() == ROLEID.SUPPORTER).ToListAsync();
+        public async Task<Account?> GetSupporter(string id) => await _accounts.Find(x => x.Id.ToString() == id && x.Deleted != true && x.RoleID.ToString() == ROLEID.SUPPORTER).FirstOrDefaultAsync();
+        public async Task<Account?> GetSupporter(string username, string password) => await _accounts.Find(x => x.Email == username && x.Password == password && x.RoleID.ToString() == ROLEID.SUPPORTER && x.Deleted != true).FirstOrDefaultAsync();
+        public async Task<Supporter?> CreateSupporter(Supporter obj)
+        {
+            obj.RoleID = ROLEID.SUPPORTER;
+            obj.CreatedDate = DateTime.Now;
+            obj.Deleted = false;
+            await _accounts.InsertOneAsync(obj);
+            return obj;
+        }
+        public async Task UpdateSupporter(Supporter obj)
+        {
+            try
+            {
+                await _accounts.ReplaceOneAsync(x => x.Id.ToString() == obj.Id, obj);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+        }
+
 
         //Driver
         public async Task<List<Driver>> GetAllDrivers()
@@ -117,9 +141,9 @@ namespace bookingtaxi_backend.Service
                 Debug.WriteLine(ex);
             }
         }
-        public async Task ApproveDriver(string accountID) {
+        public async Task ApproveDriver(string accountID, bool approval) {
             var driver = await _drivers.Find(x => x.Id == accountID && x.Deleted != true).FirstOrDefaultAsync();
-            driver.Approved = true;
+            driver.Approved = approval;
 
             await UpdateDriver(driver);
         }
@@ -161,29 +185,7 @@ namespace bookingtaxi_backend.Service
             }
         }
 
-        //Supporter
-        public async Task<List<Account>> GetAllSupporters() => await _accounts.Find(x => x.Deleted != true && x.RoleID.ToString() == ROLEID.SUPPORTER).ToListAsync();
-        public async Task<Account?> GetSupporter(string id) => await _accounts.Find(x => x.Id.ToString() == id && x.Deleted != true && x.RoleID.ToString() == ROLEID.SUPPORTER).FirstOrDefaultAsync();
-        public async Task<Account?> GetSupporter(string username, string password) => await _accounts.Find(x => x.Email == username && x.Password == password && x.RoleID.ToString() == ROLEID.SUPPORTER && x.Deleted != true).FirstOrDefaultAsync();
-        public async Task<Supporter?> CreateSupporter(Supporter obj)
-        {
-            obj.RoleID = ROLEID.SUPPORTER;
-            obj.CreatedDate = DateTime.Now;
-            obj.Deleted = false;
-            await _accounts.InsertOneAsync(obj);
-            return obj;
-        }
-        public async Task UpdateSupporter(Supporter obj)
-        {
-            try
-            {
-                await _accounts.ReplaceOneAsync(x => x.Id.ToString() == obj.Id, obj);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-        }
+        
 
         //Role
         public async Task DeleteRole(string id)
