@@ -39,7 +39,7 @@ namespace bookingtaxi_backend.Controller
         [Authorize]
         [RoleClaimRequires(new string[] { IdentityData.AdminAccountRoleClaimValue })]
         [HttpPut("Administrator")]
-        public async Task<IActionResult> UpdateAdministratorAccount(Administrator account)
+        public async Task<IActionResult> UpdateAdministratorAccount(Account account)
         {
             var obj = await _accountService.GetAdministrator(account.Id);
 

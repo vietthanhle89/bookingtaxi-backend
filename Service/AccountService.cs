@@ -68,14 +68,14 @@ namespace bookingtaxi_backend.Service
 
 
         //Administrator
-        public async Task<Administrator?> CreateAdministrator(Administrator obj) {
+        public async Task<Administrator?> CreateAdministrator(Account obj) {
             obj.RoleID = ROLEID.ADMIN;
             obj.CreatedDate = DateTime.Now;
             obj.Deleted = false;
             await _accounts.InsertOneAsync(obj);
-            return obj;
+            return (Administrator?)obj;
         }
-        public async Task UpdateAdministrator(Administrator obj) {
+        public async Task UpdateAdministrator(Account obj) {
             try
             {
                 await _accounts.ReplaceOneAsync(x => x.Id.ToString() == obj.Id, obj);
