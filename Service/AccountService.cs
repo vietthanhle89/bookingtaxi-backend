@@ -164,6 +164,10 @@ namespace bookingtaxi_backend.Service
             return await _customers.Find(x => x.Deleted != true && x.RoleID.ToString() == ROLEID.CUSTOMER).ToListAsync();
         }
         public async Task<Customer?> GetCustomer(string id) => await _customers.Find(x => x.Id.ToString() == id && x.Deleted != true && x.RoleID.ToString() == ROLEID.CUSTOMER).FirstOrDefaultAsync();
+        public async Task<Customer?> FindCustomerByPhone(string phone) => await _customers.Find(x => x.Phone.ToString() == phone && x.Deleted != true && x.RoleID.ToString() == ROLEID.CUSTOMER).FirstOrDefaultAsync();
+
+
+        
         public async Task<Customer?> GetCustomer(string username, string password) => await _customers.Find(x => x.Email == username && x.Password == password && x.RoleID.ToString() == ROLEID.CUSTOMER && x.Deleted != true).FirstOrDefaultAsync();
         public async Task<Customer?> CreateCustomer(Customer obj)
         {

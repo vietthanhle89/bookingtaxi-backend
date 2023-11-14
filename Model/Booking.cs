@@ -18,9 +18,15 @@ namespace bookingtaxi_backend.Model
         public string StartLong { get; set; } = null!;
         public string StartLat { get; set; } = null!;
         public string StartAddress { get; set; } = null!;
+        public string StartPlaceID { get; set; } = null!;
         public string EndLong { get; set; } = null!;
         public string EndLat { get; set; } = null!;
         public string EndAddress { get; set; } = null!;
+        public string EndPlaceID { get; set; } = null!;
+        public string Distance { get; set; } = null!;
+        public decimal Price { get; set; }
+        public string Duration{ get; set; } = null!;
+
         public string MakerAccountID { get; set; } = null!;
         public bool Deleted { get; set; }
     }

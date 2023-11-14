@@ -311,6 +311,14 @@ namespace bookingtaxi_backend.Controller
             return await _accountService.GetCustomer(id);
         }
 
+        [Authorize]
+        [RoleClaimRequires(new string[] { IdentityData.AdminAccountRoleClaimValue, IdentityData.SupporterAccountRoleClaimValue })]
+        [HttpGet("GetCustomer")]
+        public async Task<Customer?> FindCustomerByPhone(string phone)
+        {
+            return await _accountService.FindCustomerByPhone(phone);
+        }
+
 
         [Authorize]
         [HttpPost("Role")]

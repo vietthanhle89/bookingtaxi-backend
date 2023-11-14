@@ -1,13 +1,10 @@
 ﻿db = connect("mongodb://localhost:27017/BookingTaxi");
 
 db.dropDatabase('BookingTaxi');
+
 db.createCollection('Role');
 db.createCollection('DriverStatus');
 db.createCollection('Account');
-db.createCollection('Driver');
-db.createCollection('Customer');
-db.createCollection('Administrator');
-db.createCollection('Supporter');
 
 db.createCollection('DocumentationImage');
 db.createCollection('DriverCar');
@@ -133,7 +130,10 @@ db.Account.insertMany([
         "RoleID": "000000000000000000000003",
         "ProfileImage": "profile_image.png",
         "Deleted": false,
-        "CreatedDate": "2023-11-09"
+        "CreatedDate": "2023-11-09",
+        "Phone": "0765088879",
+        "Gender": "Male",
+        "Address": "253 Hoàng Văn Thụ, Quận Phú Nhuận, TP.HCM",
     },
     {
         "_id": ObjectId("000000000000000000000004"),
@@ -148,5 +148,25 @@ db.Account.insertMany([
     }
 ])
 
-
+db.Booking.insertMany([
+    {
+        "_id": ObjectId("000000000000000000000001"),
+        "CustomerID": "000000000000000000000003",
+        "BookingDate": "2023-11-09",
+        "CarTypeID": "000000000000000000000001",
+        "CompleteDate": "2023-11-09",
+        "BookingStatusID": "000000000000000000000001",
+        "StartLong": "",
+        "StartLat": "",
+        "StartAddress": "Hồ con rùa",
+        "EndLong": "",
+        "EndLat": "",
+        "EndAddress": "Dinh độc lập",
+        "MakerAccountID": "000000000000000000000004",
+        "Distance": "8.4 km",
+        "Duration": "22 mins",
+        "Price": "92400",
+        "Deleted": false
+    }
+])
 

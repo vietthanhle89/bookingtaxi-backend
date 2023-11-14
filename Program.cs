@@ -26,6 +26,8 @@ builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSet
 builder.Services.AddSingleton<AccountService>();
 builder.Services.AddSingleton<EmailService>();
 builder.Services.AddSingleton<DriverPropertiesService>();
+builder.Services.AddSingleton<BookingService>();
+
 
 //Realtime communication
 builder.Services.AddSignalR();

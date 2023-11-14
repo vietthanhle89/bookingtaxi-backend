@@ -5,11 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace bookingtaxi_backend.Controller
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class BookingController : ControllerBase
     {
         private readonly BookingService _bookingService;
 
-        public BookingController(BookingService bookingService, EmailService emailService)
+        public BookingController(BookingService bookingService)
         {
             _bookingService = bookingService;
         }
