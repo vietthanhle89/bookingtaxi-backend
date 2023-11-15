@@ -296,7 +296,7 @@ namespace bookingtaxi_backend.Controller
         }
 
         [Authorize]
-        [RoleClaimRequires(new string[] { IdentityData.AdminAccountRoleClaimValue })]
+        [RoleClaimRequires(new string[] { IdentityData.AdminAccountRoleClaimValue, IdentityData.SupporterAccountRoleClaimValue })]
         [HttpGet("GetAllCustomers")]
         public async Task<List<Customer>> GetAllCustomers()
         {
@@ -304,7 +304,6 @@ namespace bookingtaxi_backend.Controller
         }
 
         [Authorize]
-        [RoleClaimRequires(new string[] { IdentityData.AdminAccountRoleClaimValue, IdentityData.CustomerAccountRoleClaimValue })]
         [HttpGet("GetCustomer")]
         public async Task<Customer?> GetCustomer(string id)
         {
@@ -312,8 +311,7 @@ namespace bookingtaxi_backend.Controller
         }
 
         [Authorize]
-        [RoleClaimRequires(new string[] { IdentityData.AdminAccountRoleClaimValue, IdentityData.SupporterAccountRoleClaimValue })]
-        [HttpGet("GetCustomer")]
+        [HttpGet("FindCustomerByPhone")]
         public async Task<Customer?> FindCustomerByPhone(string phone)
         {
             return await _accountService.FindCustomerByPhone(phone);

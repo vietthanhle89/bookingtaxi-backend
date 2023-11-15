@@ -28,6 +28,7 @@ namespace bookingtaxi_backend.Model
         public string Duration{ get; set; } = null!;
 
         public string MakerAccountID { get; set; } = null!;
+        public string Note { get; set; } = null!;
         public bool Deleted { get; set; }
     }
 
