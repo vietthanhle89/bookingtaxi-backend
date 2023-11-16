@@ -18,7 +18,7 @@ namespace bookingtaxi_backend.Hub
         {
             while (true)
             {
-                var a = await _bookingService.GetAllWaitingBookings();
+                var a = await _bookingService.GetAllBookings();
 
                 await Clients.Caller.ReceivedMessage(a);
                 await Task.Delay(new TimeSpan(0, 0, 5), cancellationToken);
