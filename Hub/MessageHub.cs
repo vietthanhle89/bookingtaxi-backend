@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using System;
 
-namespace bookingtaxi_backend.BookingHub
+namespace bookingtaxi_backend.Hub
 {
     public class MessageHub : Hub<ITypeHub>
     {

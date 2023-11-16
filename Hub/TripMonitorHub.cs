@@ -2,7 +2,7 @@
 using MongoDB.Driver.Core.Connections;
 using System;
 
-namespace bookingtaxi_backend.BookingHub
+namespace bookingtaxi_backend.Hub
 {
     public class TripMonitorHub : Hub<ITypeHub>
     {

@@ -30,6 +30,12 @@ namespace bookingtaxi_backend.Service
         {
             return await _booking.Find(x => x.Deleted != true).ToListAsync();
         }
+
+        public async Task<List<Booking>> GetAllWaitingBookings()
+        {
+            return await _booking.Find(x => x.Deleted != true && x.BookingStatusID == "000000000000000000000001").ToListAsync();
+        }
+
         public async Task<List<Booking>> GetAllBookingsByCustomer(string customerID)
         {
             return await _booking.Find(x => x.Deleted != true && x.CustomerID == customerID ).ToListAsync();

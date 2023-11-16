@@ -55,6 +55,4 @@ namespace bookingtaxi_backend.Model
         public bool Deleted { get; set; }
         public decimal Price { get; set; }
     }
-
-
 }
