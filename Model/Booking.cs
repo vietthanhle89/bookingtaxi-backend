@@ -53,6 +53,13 @@ namespace bookingtaxi_backend.Model
         public string DriverID { get; set; } = null!;
         public DateTime AssignDate { get; set; }
         public bool Deleted { get; set; }
-        public decimal Price { get; set; }
+    }
+
+    public class BookingStatusEnum {
+        public static string WAITING = "000000000000000000000001";
+        public static string CONNECTED = "000000000000000000000002";
+        public static string CANCELLED = "000000000000000000000003";
+        public static string ON_THE_GO = "000000000000000000000004";
+        public static string COMPLETED = "000000000000000000000005";
     }
 }

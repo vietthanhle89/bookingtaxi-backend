@@ -77,12 +77,26 @@ namespace bookingtaxi_backend.Controller
             return await _bookingService.GetAllBookingsByCustomer(customerID);
         }
 
-
+        [Authorize]
+        [HttpGet("CheckBookingAssignation")]
+        public async Task<bool> CheckBookingAssignation(string driverID, string bookingID)
+        {
+            return await _bookingService.CheckBookingAssignation(driverID, bookingID);
+        }
 
         [Authorize]
         [HttpPost("BookingAssignation")]
         public async Task<IActionResult> PostBookingAssignation(BookingAssignation obj)
         {
+            Booking _booking = await _bookingService.GetBooking(obj.BookingID);
+
+            if (_booking is null)
+            {
+                return NotFound();
+            }
+            _booking.BookingStatusID = BookingStatusEnum.CONNECTED;
+            await _bookingService.UpdateBooking(_booking);
+
             BookingAssignation createdObj = await _bookingService.CreateBookingAssignation(obj);
             return CreatedAtAction("PostBookingAssignation", createdObj);
         }

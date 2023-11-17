@@ -11,8 +11,9 @@ Import data
 
 {"arguments":["Thanh Le is here"],"invocationId":"0","target":"BroadcastMessage","type":1}
 {"invocationId":"0","target":"GetAllBookings","type":1}
-{"arguments":["Thanh Le is here"],"invocationId":"0","target":"GetAllBookings","type":1}
+{"arguments":[],"invocationId":"0","target":"GetAllBookings","type":1}
 
 
 
 AddPersonToGroup
+

@@ -10,6 +10,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace bookingtaxi_backend.Model
 {
+    [BsonIgnoreExtraElements]
     public class Account
     {
         [BsonId]

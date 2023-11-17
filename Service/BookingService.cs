@@ -33,7 +33,7 @@ namespace bookingtaxi_backend.Service
 
         public async Task<List<Booking>> GetAllWaitingBookings()
         {
-            return await _booking.Find(x => x.Deleted != true && x.BookingStatusID == "000000000000000000000001").ToListAsync();
+            return await _booking.Find(x => x.Deleted != true && x.BookingStatusID == BookingStatusEnum.WAITING).ToListAsync();
         }
 
         public async Task<List<Booking>> GetAllBookingsByCustomer(string customerID)
@@ -52,7 +52,10 @@ namespace bookingtaxi_backend.Service
         {
             try
             {
-                await _booking.ReplaceOneAsync(x => x.Id.ToString() == obj.Id, obj);
+                obj.Id = obj.Id.ToString();
+                await _booking.UpdateOneAsync(x => x.Id.ToString() == obj.Id,
+                    Builders<Booking>.Update.Set(rec => rec.BookingStatusID, obj.BookingStatusID));
+                //await _booking.ReplaceOneAsync(x => x.Id.ToString() == obj.Id, obj);
             }
             catch (Exception ex)
             {
@@ -80,12 +83,26 @@ namespace bookingtaxi_backend.Service
         {
             return await _bookingAssignations.Find(x => x.Deleted != true && x.BookingID == bookingID).ToListAsync();
         }
+
+        public async Task<bool> CheckBookingAssignation(string driverID, string bookingID)
+        {
+            var _obj = await _bookingAssignations.Find(x => x.BookingID == bookingID && (x.DriverID == driverID || x.Deleted == false)).FirstOrDefaultAsync();
+
+            if (_obj == null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public async Task<BookingAssignation?> GetBookingAssignation(string id) => await _bookingAssignations.Find(x => x.Id.ToString() == id && x.Deleted != true).FirstOrDefaultAsync();
         public async Task<BookingAssignation?> CreateBookingAssignation(BookingAssignation obj)
-        {
+        {            
             obj.AssignDate = DateTime.Now;
             obj.Deleted = false;
             await _bookingAssignations.InsertOneAsync(obj);
+
             return obj;            
         }
         public async Task UpdateBookingAssignation(BookingAssignation obj)

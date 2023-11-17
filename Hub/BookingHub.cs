@@ -14,21 +14,32 @@ namespace bookingtaxi_backend.Hub
             _bookingService = bookingService;
         }
 
-        public async Task PeriodicFooAsync(CancellationToken cancellationToken = default)
+        public async Task GetAllBookings()
         {
             while (true)
             {
                 var a = await _bookingService.GetAllBookings();
 
                 await Clients.Caller.ReceivedMessage(a);
-                await Task.Delay(new TimeSpan(0, 0, 5), cancellationToken);
+                await Task.Delay(new TimeSpan(0, 0, 5));
+            }
+        }
+
+        public async Task GetWaitingBookings()
+        {
+            while (true)
+            {
+                var a = await _bookingService.GetAllWaitingBookings();
+
+                await Clients.Caller.ReceivedMessage(a);
+                await Task.Delay(new TimeSpan(0, 0, 5));
             }
         }
 
         public override async Task OnConnectedAsync()
         {            
             //await Clients.Caller.ReceivedMessage($"You are connected to Booking chanel! ConnectionId: {Context.ConnectionId}");
-            await PeriodicFooAsync();
+            //await GetAllBookings();
             await base.OnConnectedAsync();
         }
 
