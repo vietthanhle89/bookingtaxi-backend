@@ -71,6 +71,13 @@ namespace bookingtaxi_backend.Controller
         }
 
         [Authorize]
+        [HttpGet("GetInProgressBookings")]
+        public async Task<List<Booking>> GetInProgressBookings(string driverID)
+        {
+            return await _bookingService.GetInProgressBookings(driverID);
+        }
+
+        [Authorize]
         [HttpGet("GetAllBookingsByCustomer")]
         public async Task<List<Booking>> GetAllBookingsByCustomer(string customerID)
         {
@@ -83,6 +90,15 @@ namespace bookingtaxi_backend.Controller
         {
             return await _bookingService.CheckBookingAssignation(driverID, bookingID);
         }
+
+        [Authorize]
+        [HttpGet("IsDriverAvailableForBooking")]
+        public async Task<bool> IsDriverAvailableForBooking(string driverID)
+        {
+            return await _bookingService.IsDriverAvailableForBooking(driverID);
+        }
+
+
 
         [Authorize]
         [HttpPost("BookingAssignation")]
@@ -154,7 +170,13 @@ namespace bookingtaxi_backend.Controller
             return await _bookingService.GetAllBookingAssignations();
         }
 
-
+        [Authorize]
+        [HttpPut("DriverCancelBooking")]
+        public async Task<IActionResult> DriverCancelBooking(string driverID, string bookingID)
+        {
+            await _bookingService.DriverCancelBooking(driverID, bookingID);
+            return Ok();
+        }
 
 
         [Authorize]
@@ -194,8 +216,6 @@ namespace bookingtaxi_backend.Controller
         {
             return await _bookingService.GetAllBookingStatus();
         }
-
-
 
 
         [Authorize]

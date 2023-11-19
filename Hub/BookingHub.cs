@@ -25,11 +25,11 @@ namespace bookingtaxi_backend.Hub
             }
         }
 
-        public async Task GetWaitingBookings()
+        public async Task GetWaitingBookings(string driverID)
         {
             while (true)
             {
-                var a = await _bookingService.GetAllWaitingBookings();
+                var a = await _bookingService.GetAllWaitingBookings(driverID);
 
                 await Clients.Caller.ReceivedMessage(a);
                 await Task.Delay(new TimeSpan(0, 0, 5));

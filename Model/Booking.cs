@@ -62,4 +62,10 @@ namespace bookingtaxi_backend.Model
         public static string ON_THE_GO = "000000000000000000000004";
         public static string COMPLETED = "000000000000000000000005";
     }
+
+    public class CarTypeEnum
+    {
+        public static string FOUR_SEAT = "000000000000000000000001";
+        public static string SEVEN_SEAT = "000000000000000000000002";
+    }
 }

@@ -48,7 +48,9 @@ namespace bookingtaxi_backend.Service
         {
             try
             {
-                await _accounts.ReplaceOneAsync(x => x.Id.ToString() == updatedObj.Id, updatedObj);
+                Account newObj = updatedObj;
+                newObj.Id = updatedObj.Id;
+                await _accounts.ReplaceOneAsync(x => x.Id.ToString() == updatedObj.Id, newObj);
             }
             catch (Exception ex)
             {
@@ -104,7 +106,10 @@ namespace bookingtaxi_backend.Service
         {
             try
             {
-                await _accounts.ReplaceOneAsync(x => x.Id.ToString() == obj.Id, obj);
+                Supporter newObj = obj;
+                newObj.Id = obj.Id;
+
+                await _accounts.ReplaceOneAsync(x => x.Id.ToString() == obj.Id, newObj);
             }
             catch (Exception ex)
             {
@@ -134,7 +139,9 @@ namespace bookingtaxi_backend.Service
         {
             try
             {
-                await _drivers.ReplaceOneAsync(x => x.Id.ToString() == obj.Id, obj);
+                Driver newObj = obj;
+                newObj.Id = obj.Id;
+                await _drivers.ReplaceOneAsync(x => x.Id.ToString() == obj.Id, newObj);
             }
             catch (Exception ex)
             {

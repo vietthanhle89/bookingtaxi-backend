@@ -13,6 +13,8 @@ db.createCollection('CarType');
 db.createCollection('Booking');
 db.createCollection('BookingAssignation');
 db.createCollection('BookingStatus');
+db.createCollection('TripRecord');
+
 
 
 db.Role.insertMany([
@@ -84,7 +86,7 @@ db.BookingStatus.insertMany([
     },
     {
         "_id": ObjectId("000000000000000000000004"),
-        "Name": "ON_THE_GO"
+        "Name": "ON THE GO"
     },
     {
         "_id": ObjectId("000000000000000000000005"),
@@ -97,8 +99,25 @@ db.Account.insertMany([
         "_id": ObjectId("000000000000000000000001"),
         "Email": "driver@booking.taxi",
         "Password": "p@ssw0rd",
-        "GivenName": "Elsa",
-        "LastName": "Tran",
+        "GivenName": "Driver",
+        "LastName": "4-seat car",
+        "RoleID": "000000000000000000000001",
+        "ProfileImage": "profile_image.png",
+        "Deleted": false,
+        "CreatedDate": "2023-11-09",
+        "Phone": "0765088879",
+        "Gender": "Male",
+        "Address": "133 Hoàng Văn Thụ, Quận Tân Bình, TP.HCM",
+        "NationalID": "079088012345",
+        "DriverStatusID": "",
+        "Approved": false
+    },
+    {
+        "_id": ObjectId("000000000000000000000010"),
+        "Email": "driver2@booking.taxi",
+        "Password": "p@ssw0rd",
+        "GivenName": "Driver",
+        "LastName": "7-seat car",
         "RoleID": "000000000000000000000001",
         "ProfileImage": "profile_image.png",
         "Deleted": false,
@@ -176,9 +195,28 @@ db.Account.insertMany([
     }
 ])
 
+db.DriverCar.insertMany([
+    {
+        "_id": ObjectId("000000000000000000000001"),
+        "DriverID": "000000000000000000000001",
+        "CarTypeID": "000000000000000000000001",
+        "Color": "Black",
+        "Number": "59L3-12345",
+        "Deleted": false
+    },
+    {
+        "_id": ObjectId("000000000000000000000002"),
+        "DriverID": "000000000000000000000010",
+        "CarTypeID": "000000000000000000000002",
+        "Color": "Black",
+        "Number": "59L3-67890",
+        "Deleted": false
+    }
+])
+
 db.Booking.insertMany([
     {
-        "_id": "65557277c135b4bfe5ea0927",
+        "_id": ObjectId("65557277c135b4bfe5ea0927"),
         "CustomerID": "000000000000000000000003",
         "BookingDate": "2023-11-16",
         "CarTypeID": "000000000000000000000001",
@@ -200,7 +238,7 @@ db.Booking.insertMany([
         "Deleted": false
     },
     {
-        "_id": "65557295c135b4bfe5ea0928",
+        "_id": ObjectId("65557295c135b4bfe5ea0928"),
         "CustomerID": "000000000000000000000005",
         "BookingDate": "2023-11-16T01:38:29.909Z",
         "CarTypeID": "000000000000000000000002",
@@ -222,7 +260,7 @@ db.Booking.insertMany([
         "Deleted": false
       },
       {
-        "_id": "65557277c135b4bfe5ea0929",
+          "_id": ObjectId("65557277c135b4bfe5ea0929"),
         "CustomerID": "000000000000000000000003",
         "BookingDate": "2023-11-16",
         "CarTypeID": "000000000000000000000001",
@@ -244,7 +282,7 @@ db.Booking.insertMany([
         "Deleted": false
     },
     {
-        "_id": "65557295c135b4bfe5ea0930",
+        "_id": ObjectId("65557295c135b4bfe5ea0930"),
         "CustomerID": "000000000000000000000005",
         "BookingDate": "2023-11-16T01:38:29.909Z",
         "CarTypeID": "000000000000000000000002",
@@ -266,7 +304,7 @@ db.Booking.insertMany([
         "Deleted": false
       },
       {
-        "_id": "65557277c135b4bfe5ea0931",
+          "_id": ObjectId("65557277c135b4bfe5ea0931"),
         "CustomerID": "000000000000000000000003",
         "BookingDate": "2023-11-16",
         "CarTypeID": "000000000000000000000001",
@@ -288,7 +326,7 @@ db.Booking.insertMany([
         "Deleted": false
     },
     {
-        "_id": "65557295c135b4bfe5ea0932",
+        "_id": ObjectId("65557295c135b4bfe5ea0932"),
         "CustomerID": "000000000000000000000005",
         "BookingDate": "2023-11-16T01:38:29.909Z",
         "CarTypeID": "000000000000000000000002",

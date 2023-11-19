@@ -4,6 +4,7 @@ namespace bookingtaxi_backend.Hub
 {
     public interface ITypeHub
     {
+        Task ReceivedMessage(string username, string message, string time);
         Task ReceivedMessage(string username, string message);
         Task ReceivedMessage(string message);
         Task ReceivedMessage(List<Booking> message);

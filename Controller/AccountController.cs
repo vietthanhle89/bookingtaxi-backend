@@ -194,8 +194,6 @@ namespace bookingtaxi_backend.Controller
             return BadRequest(new ErrorResponse("Email is already existed"));
         }
 
-        [Authorize]
-        [RoleClaimRequires(new string[] { IdentityData.DriverAccountRoleClaimValue })]
         [HttpPut("Driver")]
         public async Task<IActionResult> UpdateDriver(Driver account)
         {
@@ -278,7 +276,6 @@ namespace bookingtaxi_backend.Controller
             return BadRequest(new ErrorResponse("Email is already existed"));
         }
 
-        [Authorize]
         [RoleClaimRequires(new string[] { IdentityData.CustomerAccountRoleClaimValue })]
         [HttpPut("Customer")]
         public async Task<IActionResult> UpdateCustomer(Customer account)

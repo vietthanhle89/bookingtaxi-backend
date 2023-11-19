@@ -43,6 +43,15 @@ namespace bookingtaxi_backend.Service
             return obj;
         }
 
+        public async Task<DocumentationImage?> UpdateDocumentationImage(DocumentationImage obj)
+        {
+            DocumentationImage newObj = obj;
+            newObj.Id = obj.Id;
+
+            await _documentationImages.ReplaceOneAsync(x=>x.Id == obj.Id, newObj);
+            return obj;
+        }
+
         public async Task<List<DocumentationImage>> GetAllDocumentationImages(string driverID)
         {
             return await _documentationImages.Find(x => x.DriverID.ToString() == driverID).ToListAsync();

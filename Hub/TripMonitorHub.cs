@@ -1,58 +1,58 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using bookingtaxi_backend.Model;
+using bookingtaxi_backend.Service;
+using Microsoft.AspNetCore.SignalR;
 using MongoDB.Driver.Core.Connections;
 using System;
+using System.Globalization;
 
 namespace bookingtaxi_backend.Hub
 {
     public class TripMonitorHub : Hub<ITypeHub>
     {
-        public async Task BroadcastMessage(string username, string message)
+        private readonly BookingService _bookingService;
+
+        public TripMonitorHub(BookingService bookingService)
         {
-            await Clients.All.ReceivedMessage(username, message);
+            _bookingService = bookingService;
         }
 
-        public async Task SendToOthers(string username, string message)
+        public async Task Report(string bookingID, string lng, string lat)
         {
-            await Clients.Others.ReceivedMessage(username, message);
+            var a = new TripRecord()
+            {
+                Id = "",
+                BookingID = bookingID,
+                Date = DateTime.Now,
+                Lat = lat,
+                Long = lng
+            };
+
+            await _bookingService.CreateTripRecord(a);
+            await Clients.Group("trip-"+bookingID).ReceivedMessage(lng, lat);
         }
 
-        public async Task SendToPerson(string ToConnectionId, string username, string message)
+        public async Task AddPersonToGroup(string ConnectionId, string bookingID)
         {
-            await Clients.Client(ToConnectionId).ReceivedMessage(username, message);
+            await Groups.AddToGroupAsync(ConnectionId, "trip-" + bookingID);
         }
 
-        public async Task SendToGroup(string groupName, string username, string message)
+        public async Task RemovePersonFromGroup(string ConnectionId, string bookingID)
         {
-            await Clients.Group(groupName).ReceivedMessage(username, message);
+            await Groups.RemoveFromGroupAsync(ConnectionId, "trip-" + bookingID);
         }
 
-        public async Task AddPersonToGroup(string ConnectionId, string groupName)
+        public async Task AddMeToGroup(string bookingID)
         {
-            await Groups.AddToGroupAsync(ConnectionId, groupName);
-            await Clients.Caller.ReceivedMessage($"User {ConnectionId} added to group {groupName}");
+            await Groups.AddToGroupAsync(Context.ConnectionId, "trip-" + bookingID);
         }
 
-        public async Task RemovePersonFromGroup(string ConnectionId, string groupName)
+        public async Task RemoveMeFromGroup(string bookingID)
         {
-            await Groups.RemoveFromGroupAsync(ConnectionId, groupName);
-            await Clients.Caller.ReceivedMessage($"User {ConnectionId} removed from group {groupName}");
-        }
-
-        public async Task AddMeToGroup(string groupName)
-        {
-            await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
-            await Clients.Caller.ReceivedMessage($"User {Context.ConnectionId} added to group {groupName}");
-        }
-
-        public async Task RemoveMeFromGroup(string groupName)
-        {
-            await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
-            await Clients.Caller.ReceivedMessage($"User {Context.ConnectionId} removed from group {groupName}");
+            await Groups.RemoveFromGroupAsync(Context.ConnectionId, "trip-" + bookingID);
         }
 
         public override async Task OnConnectedAsync()
         {
-            await Clients.Caller.ReceivedMessage($"You are connected to the server! ConnectionId: {Context.ConnectionId}");
             await base.OnConnectedAsync();
         }
 

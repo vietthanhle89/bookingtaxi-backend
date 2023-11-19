@@ -18,7 +18,6 @@ public class FileController : ControllerBase
     // string path = "..\\Files\\Images";
     string path =  String.Format("Files{0}Images", Path.DirectorySeparatorChar);
 
-    [Authorize]
     [HttpPost("ImageUpload")]
     public async Task<IActionResult> PostImage([FromForm] Image image) {
         try

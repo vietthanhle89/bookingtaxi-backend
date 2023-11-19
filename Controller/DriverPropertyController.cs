@@ -16,12 +16,18 @@ namespace bookingtaxi_backend.Controller
             _driverPropertiesServices = driverPropertiesServices;
         }
 
-        [Authorize]       
         [HttpPost("DocumentationImage")]
         public async Task<IActionResult> PostDocumentationImage(DocumentationImage obj)
         {
             DocumentationImage createdObj = await _driverPropertiesServices.CreateDocumentationImage(obj);
             return CreatedAtAction("PostDocumentationImage", createdObj);
+        }
+
+        [HttpPut("DocumentationImage")]
+        public async Task<IActionResult> PutDocumentationImage(DocumentationImage obj)
+        {
+            await _driverPropertiesServices.UpdateDocumentationImage(obj);
+            return Ok();
         }
 
         [Authorize]
@@ -53,7 +59,6 @@ namespace bookingtaxi_backend.Controller
             return await _driverPropertiesServices.GetDriverCar(driverID);
         }
 
-        [Authorize]
         [HttpPost("DriverCar")]
         public async Task<IActionResult> PostDriverCar(DriverCar obj)
         {
