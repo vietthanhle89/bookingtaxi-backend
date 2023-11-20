@@ -64,6 +64,16 @@ namespace bookingtaxi_backend.Controller
         }
 
         [Authorize]
+        [HttpGet("GetMyInProgressBooking")]
+        public async Task<Booking?> GetMyInProgressBooking(String customerID)
+        {
+            var a = await _bookingService.GetMyInProgressBooking(customerID);
+            return a;
+        }
+
+        
+
+        [Authorize]
         [HttpGet("GetAllBookings")]
         public async Task<List<Booking>> GetAllBookings()
         {
@@ -75,6 +85,14 @@ namespace bookingtaxi_backend.Controller
         public async Task<List<Booking>> GetInProgressBookings(string driverID)
         {
             return await _bookingService.GetInProgressBookings(driverID);
+        }
+        
+
+        [Authorize]
+        [HttpGet("GetCompletedBookings")]
+        public async Task<List<Booking>> GetCompletedBookings(string driverID)
+        {
+            return await _bookingService.GetCompletedBookings(driverID);
         }
 
         [Authorize]

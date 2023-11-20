@@ -13,6 +13,8 @@ namespace bookingtaxi_backend.Service
         private readonly IMongoCollection<Account> _accounts;
         private readonly IMongoCollection<Driver> _drivers;
         private readonly IMongoCollection<Customer> _customers;
+        private readonly IMongoCollection<BookingAssignation> _bookingAssignations;
+
 
         public AccountService(IOptions<DatabaseSettings> settings)
         {
@@ -23,6 +25,7 @@ namespace bookingtaxi_backend.Service
             _drivers = mongoDatabase.GetCollection<Driver>(settings.Value.AccountCollectionName);
             _customers = mongoDatabase.GetCollection<Customer>(settings.Value.AccountCollectionName);
             _accounts = mongoDatabase.GetCollection<Account>(settings.Value.AccountCollectionName);
+            _bookingAssignations = mongoDatabase.GetCollection<BookingAssignation>(settings.Value.BookingAssignationCollectionName);
         }
 
         public async Task<Account?> GetAccountByCredentials(string email, string password)
@@ -124,6 +127,12 @@ namespace bookingtaxi_backend.Service
             return await _drivers.Find(x => x.Deleted != true && x.RoleID.ToString() == ROLEID.DRIVER).ToListAsync();
         }
         public async Task<Driver?> GetDriver(string id) => await _drivers.Find(x => x.Id.ToString() == id && x.Deleted != true && x.RoleID.ToString() == ROLEID.DRIVER).FirstOrDefaultAsync();
+
+        public async Task<Driver?> GetDriverByBookingID(string bookingID) {
+            var asignation = await _bookingAssignations.Find(b => b.BookingID == bookingID && b.Deleted == false).FirstOrDefaultAsync();
+            return await _drivers.Find(x => x.Id.ToString() == asignation.DriverID && x.Deleted != true && x.RoleID.ToString() == ROLEID.DRIVER).FirstOrDefaultAsync();
+        } 
+
         public async Task<Driver?> GetDriver(string username, string password) => await _drivers.Find(x => x.Email == username && x.Password == password && x.RoleID.ToString() == ROLEID.DRIVER && x.Deleted != true).FirstOrDefaultAsync();
 
         public async Task<Driver?> CreateDriver(Driver obj)

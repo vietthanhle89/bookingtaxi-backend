@@ -45,6 +45,21 @@ namespace bookingtaxi_backend.Service
             return result;
         }
 
+        public async Task<List<Booking>> GetCompletedBookings(string driverID)
+        {
+            List<Booking> result = new List<Booking>();
+            var assignations = await _bookingAssignations.Find(x => x.Deleted == false && x.DriverID == driverID).ToListAsync();
+
+            foreach (var assignation in assignations)
+            {
+                var booking = await _booking.Find(x => x.Deleted != true && assignation.BookingID == x.Id.ToString() && x.BookingStatusID == BookingStatusEnum.COMPLETED).FirstOrDefaultAsync();
+                if (booking != null) { result.Add(booking); }
+            }
+
+            return result;
+        }
+        
+
 
         public async Task<List<Booking>> GetAllWaitingBookings()
         {
@@ -78,12 +93,17 @@ namespace bookingtaxi_backend.Service
 
         }
 
-        
+        public async Task<Booking> GetMyInProgressBooking(string customerID)
+        {
+            return await _booking.Find(x => x.Deleted != true && x.CustomerID == customerID && x.BookingStatusID != BookingStatusEnum.COMPLETED && x.BookingStatusID != BookingStatusEnum.CANCELLED).FirstOrDefaultAsync();
+        }
+
 
         public async Task<List<Booking>> GetAllBookingsByCustomer(string customerID)
         {
             return await _booking.Find(x => x.Deleted != true && x.CustomerID == customerID ).ToListAsync();
         }
+
         public async Task<Booking?> GetBooking(string id) => await _booking.Find(x => x.Id.ToString() == id && x.Deleted != true).FirstOrDefaultAsync();
         public async Task<Booking?> CreateBooking(Booking obj)
         {

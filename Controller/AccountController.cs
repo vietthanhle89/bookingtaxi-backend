@@ -260,6 +260,13 @@ namespace bookingtaxi_backend.Controller
         }
 
 
+        [Authorize]
+        [HttpGet("GetDriverByBookingID")]
+        public async Task<Driver?> GetDriverByBookingID(String bookingID)
+        {
+            return await _accountService.GetDriverByBookingID(bookingID);
+        }
+
         //Customer
         [HttpPost("Customer")]
         public async Task<IActionResult> PostCustomer(Customer account)

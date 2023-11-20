@@ -36,6 +36,17 @@ namespace bookingtaxi_backend.Hub
             }
         }
 
+        public async Task GetBooking(string bookingID)
+        {
+            while (true)
+            {
+                var a = await _bookingService.GetBooking(bookingID);
+
+                await Clients.Caller.ReceivedMessage(a);
+                await Task.Delay(new TimeSpan(0, 0, 5));
+            }
+        }
+
         public override async Task OnConnectedAsync()
         {            
             //await Clients.Caller.ReceivedMessage($"You are connected to Booking chanel! ConnectionId: {Context.ConnectionId}");
