@@ -8,6 +8,8 @@ namespace bookingtaxi_backend.Hub
         Task ReceivedMessage(string username, string message);
         Task ReceivedMessage(string message);
         Task ReceivedMessage(List<Booking> message);
-        Task ReceivedMessage(Booking message);
+        Task ReceivedMessage(Booking? message);
+        Task ReceivedMessage(Driver? driver);
+        Task ReceivedMessage(DriverCar? driverCar);
     }
 }

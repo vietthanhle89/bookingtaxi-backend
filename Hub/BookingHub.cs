@@ -47,6 +47,28 @@ namespace bookingtaxi_backend.Hub
             }
         }
 
+        public async Task GetDriver(string bookingID)
+        {
+            while (true)
+            {
+                var a = await _bookingService.GetDriverByBookingID(bookingID);
+
+                await Clients.Caller.ReceivedMessage(a);
+                await Task.Delay(new TimeSpan(0, 0, 5));
+            }
+        }
+
+        public async Task GetDriverCar(string bookingID)
+        {
+            while (true)
+            {
+                var a = await _bookingService.GetDriverCarByBookingID(bookingID);
+
+                await Clients.Caller.ReceivedMessage(a);
+                await Task.Delay(new TimeSpan(0, 0, 5));
+            }
+        }
+
         public override async Task OnConnectedAsync()
         {            
             //await Clients.Caller.ReceivedMessage($"You are connected to Booking chanel! ConnectionId: {Context.ConnectionId}");

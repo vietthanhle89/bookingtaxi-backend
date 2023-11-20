@@ -196,6 +196,14 @@ namespace bookingtaxi_backend.Controller
             return Ok();
         }
 
+        [Authorize]
+        [HttpPut("CustomerCancelBooking")]
+        public async Task<IActionResult> CustomerCancelBooking(string bookingID)
+        {
+            await _bookingService.CustomerCancelBooking(bookingID);
+            return Ok();
+        }
+        
 
         [Authorize]
         [HttpPost("BookingStatus")]

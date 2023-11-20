@@ -13,6 +13,7 @@ namespace bookingtaxi_backend.Service
         private readonly IMongoCollection<BookingAssignation> _bookingAssignations;
         private readonly IMongoCollection<TripRecord> _tripRecords;
         private readonly IMongoCollection<DriverCar> _driverCar;
+        private readonly IMongoCollection<Driver> _drivers;
 
         public BookingService(IOptions<DatabaseSettings> settings)
         {
@@ -24,6 +25,7 @@ namespace bookingtaxi_backend.Service
             _bookingAssignations = mongoDatabase.GetCollection<BookingAssignation>(settings.Value.BookingAssignationCollectionName);
             _tripRecords = mongoDatabase.GetCollection<TripRecord>(settings.Value.TripRecordCollectionName);
             _driverCar = mongoDatabase.GetCollection<DriverCar>(settings.Value.DriverCarCollectionName);
+            _drivers = mongoDatabase.GetCollection<Driver>(settings.Value.AccountCollectionName);
         }
 
         //Booking
@@ -173,8 +175,34 @@ namespace bookingtaxi_backend.Service
             return true;
         }
 
+        public async Task<Driver> GetDriverByBookingID(string bookingID)
+        {
+            var assignation = await _bookingAssignations.Find(x => x.BookingID == bookingID && x.Deleted == false).FirstOrDefaultAsync();
+            if (assignation != null) {
+                var _driver = await _drivers.Find(d => d.Id == assignation.DriverID).FirstOrDefaultAsync();
+                return _driver;
+            }
+
+            return null;
+        }
+
+        public async Task<DriverCar?> GetDriverCarByBookingID(string bookingID)
+        {
+            var assignation = await _bookingAssignations.Find(x => x.BookingID == bookingID && x.Deleted == false).FirstOrDefaultAsync();
+            if (assignation != null) {
+                var driver = await _drivers.Find(d => d.Id == assignation.DriverID).FirstOrDefaultAsync();
+                if (driver != null)
+                {
+                    return await _driverCar.Find(dc => dc.DriverID == driver.Id && dc.Deleted == false).FirstOrDefaultAsync();
+                }
+            }
+            
+            return null;
+        }
 
         
+
+
         public async Task<BookingAssignation?> GetBookingAssignation(string id) => await _bookingAssignations.Find(x => x.Id.ToString() == id && x.Deleted != true).FirstOrDefaultAsync();
         public async Task<BookingAssignation?> GetBookingAssignation(string bookingID, string driverID) => await _bookingAssignations.Find(x => x.BookingID == bookingID && (x.DriverID == driverID || x.Deleted == false)).FirstOrDefaultAsync();
         public async Task<BookingAssignation?> CreateBookingAssignation(BookingAssignation obj)
@@ -245,7 +273,24 @@ namespace bookingtaxi_backend.Service
             return false;
         }
 
-        
+        public async Task<bool> CustomerCancelBooking(string bookingID)
+        {
+            try
+            {
+                var booking = await GetBooking(bookingID);
+                booking.BookingStatusID = BookingStatusEnum.CANCELLED;
+                await UpdateBooking(booking);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
+            return false;
+        }
+
+
         public async Task<List<BookingStatus>> GetAllBookingStatus()
         {
             return await _bookingStatus.Find(x => x.Id != null).ToListAsync();
