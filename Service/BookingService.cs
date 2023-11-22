@@ -100,10 +100,29 @@ namespace bookingtaxi_backend.Service
             return await _booking.Find(x => x.Deleted != true && x.CustomerID == customerID && x.BookingStatusID != BookingStatusEnum.COMPLETED && x.BookingStatusID != BookingStatusEnum.CANCELLED).FirstOrDefaultAsync();
         }
 
+        public async Task<Booking> GetDriverInProgressBooking(string driverID)
+        {
+            var assigns = await _bookingAssignations.Find(x => x.Deleted == false && x.DriverID == driverID).ToListAsync();
+            foreach (var assign in assigns)
+            {
+                var booking = await _booking.Find(x => x.Deleted != true && x.Id == assign.BookingID && (x.BookingStatusID != BookingStatusEnum.COMPLETED || x.BookingStatusID != BookingStatusEnum.CANCELLED)).FirstOrDefaultAsync();
+                if (booking != null) {
+                    return booking;
+                }
+
+            }
+            return null;
+        }
+
 
         public async Task<List<Booking>> GetAllBookingsByCustomer(string customerID)
         {
             return await _booking.Find(x => x.Deleted != true && x.CustomerID == customerID ).ToListAsync();
+        }
+
+        public async Task<List<Booking>> GetAllCompletedBookingsByCustomer(string customerID)
+        {
+            return await _booking.Find(x => x.Deleted != true && x.CustomerID == customerID && (x.BookingStatusID == BookingStatusEnum.COMPLETED || x.BookingStatusID == BookingStatusEnum.CANCELLED)).ToListAsync();
         }
 
         public async Task<Booking?> GetBooking(string id) => await _booking.Find(x => x.Id.ToString() == id && x.Deleted != true).FirstOrDefaultAsync();
@@ -120,7 +139,6 @@ namespace bookingtaxi_backend.Service
             {
                 var newObj = obj;
                 newObj.Id = obj.Id;
-                newObj.Note = "Hello";
                 await _booking.ReplaceOneAsync(x => x.Id == obj.Id, newObj);
             }
             catch (Exception ex)

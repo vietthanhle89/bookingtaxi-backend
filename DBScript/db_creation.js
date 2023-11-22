@@ -102,7 +102,7 @@ db.Account.insertMany([
         "GivenName": "Driver",
         "LastName": "4-seat car",
         "RoleID": "000000000000000000000001",
-        "ProfileImage": "profile_image.png",
+        "ProfileImage": "000000000000000000000001.jpg",
         "Deleted": false,
         "CreatedDate": "2023-11-09",
         "Phone": "0765088879",
@@ -110,7 +110,7 @@ db.Account.insertMany([
         "Address": "133 Hoàng Văn Thụ, Quận Tân Bình, TP.HCM",
         "NationalID": "079088012345",
         "DriverStatusID": "",
-        "Approved": false
+        "Approved": true
     },
     {
         "_id": ObjectId("000000000000000000000010"),
@@ -119,7 +119,7 @@ db.Account.insertMany([
         "GivenName": "Driver",
         "LastName": "7-seat car",
         "RoleID": "000000000000000000000001",
-        "ProfileImage": "profile_image.png",
+        "ProfileImage": "000000000000000000000010.png",
         "Deleted": false,
         "CreatedDate": "2023-11-09",
         "Phone": "0765088879",
@@ -136,7 +136,7 @@ db.Account.insertMany([
         "GivenName": "Elsa",
         "LastName": "Tran",
         "RoleID": "000000000000000000000002",
-        "ProfileImage": "profile_image.png",
+        "ProfileImage": "000000000000000000000002.png",
         "Deleted": false,
         "CreatedDate": "2023-11-09"
     },
@@ -144,10 +144,10 @@ db.Account.insertMany([
         "_id": ObjectId("000000000000000000000003"),
         "Email": "customer3@booking.taxi",
         "Password": "p@ssw0rd",
-        "GivenName": "Elsa 3",
-        "LastName": "Tran",
+        "GivenName": "Viết Thanh",
+        "LastName": "Lê",
         "RoleID": "000000000000000000000003",
-        "ProfileImage": "profile_image.png",
+        "ProfileImage": "000000000000000000000003.png",
         "Deleted": false,
         "CreatedDate": "2023-11-09",
         "Phone": "0765000003",
@@ -189,7 +189,7 @@ db.Account.insertMany([
         "GivenName": "Elsa",
         "LastName": "Tran",
         "RoleID": "000000000000000000000004",
-        "ProfileImage": "profile_image.png",
+        "ProfileImage": "000000000000000000000004.png",
         "Deleted": false,
         "CreatedDate": "2023-11-09"
     }
@@ -234,118 +234,32 @@ db.Booking.insertMany([
         "Price": "13200",
         "Duration": "5 mins",
         "MakerAccountID": "000000000000000000000004",
-        "Note": "Customer phone number: 0765000003\r\nEstimated distance: 1.2 km\r\nEstimated duration: 5 mins\r\nPrice: 13200 vnđ",
+        "Note": "",
         "Deleted": false
-    },
-    {
-        "_id": ObjectId("65557295c135b4bfe5ea0928"),
-        "CustomerID": "000000000000000000000005",
-        "BookingDate": "2023-11-16T01:38:29.909Z",
-        "CarTypeID": "000000000000000000000002",
-        "CompleteDate": "2998-12-31T17:00:00.000Z",
-        "BookingStatusID": "000000000000000000000001",
-        "StartLong": "106.653277",
-        "StartLat": "10.7861046",
-        "StartAddress": "Chợ Tân Bình, Lý Thường Kiệt, Phường 8, Tân Bình, Ho Chi Minh City, Vietnam",
-        "StartPlaceID": "ChIJNbFrArYudTERGDWm6bnB-uM",
-        "EndLong": "106.7069114",
-        "EndLat": "10.7736136",
-        "EndAddress": "Bến Bạch Đằng, Đường Tôn Đức Thắng, Bến Nghé, District 1, Ho Chi Minh City, Vietnam",
-        "EndPlaceID": "ChIJCRuwB0QvdTER4f_uFnGCDnY",
-        "Distance": "9.5 km",
-        "Price": "118750",
-        "Duration": "24 mins",
-        "MakerAccountID": "000000000000000000000004",
-        "Note": "Customer phone number: 0765000002\r\nEstimated distance: 9.5 km\r\nEstimated duration: 24 mins\r\nPrice: 118750 vnđ",
-        "Deleted": false
-      },
-      {
-          "_id": ObjectId("65557277c135b4bfe5ea0929"),
-        "CustomerID": "000000000000000000000003",
-        "BookingDate": "2023-11-16",
-        "CarTypeID": "000000000000000000000001",
-        "CompleteDate": "2998-12-31T17:00:00.000Z",
-        "BookingStatusID": "000000000000000000000002",
-        "StartLong": "106.6990189",
-        "StartLat": "10.7797855",
-        "StartAddress": "Nhà thờ Đức Bà, Công xã Paris, Bến Nghé, District 1, Ho Chi Minh City, Vietnam",
-        "StartPlaceID": "ChIJUSTY5jcvdTERRVvtbJNZT-g",
-        "EndLong": "106.7052906",
-        "EndLat": "10.7875434",
-        "EndAddress": "Thảo Cầm Viên Sài Gòn, Nguyễn Bỉnh Khiêm, Bến Nghé, District 1, Ho Chi Minh City, Vietnam",
-        "EndPlaceID": "ChIJx7wwM0svdTERjuH2a9dkuU0",
-        "Distance": "1.2 km",
-        "Price": "13200",
-        "Duration": "5 mins",
-        "MakerAccountID": "000000000000000000000004",
-        "Note": "Customer phone number: 0765000003\r\nEstimated distance: 1.2 km\r\nEstimated duration: 5 mins\r\nPrice: 13200 vnđ",
-        "Deleted": false
-    },
-    {
-        "_id": ObjectId("65557295c135b4bfe5ea0930"),
-        "CustomerID": "000000000000000000000005",
-        "BookingDate": "2023-11-16T01:38:29.909Z",
-        "CarTypeID": "000000000000000000000002",
-        "CompleteDate": "2998-12-31T17:00:00.000Z",
-        "BookingStatusID": "000000000000000000000003",
-        "StartLong": "106.653277",
-        "StartLat": "10.7861046",
-        "StartAddress": "Chợ Tân Bình, Lý Thường Kiệt, Phường 8, Tân Bình, Ho Chi Minh City, Vietnam",
-        "StartPlaceID": "ChIJNbFrArYudTERGDWm6bnB-uM",
-        "EndLong": "106.7069114",
-        "EndLat": "10.7736136",
-        "EndAddress": "Bến Bạch Đằng, Đường Tôn Đức Thắng, Bến Nghé, District 1, Ho Chi Minh City, Vietnam",
-        "EndPlaceID": "ChIJCRuwB0QvdTER4f_uFnGCDnY",
-        "Distance": "9.5 km",
-        "Price": "118750",
-        "Duration": "24 mins",
-        "MakerAccountID": "000000000000000000000004",
-        "Note": "Customer phone number: 0765000002\r\nEstimated distance: 9.5 km\r\nEstimated duration: 24 mins\r\nPrice: 118750 vnđ",
-        "Deleted": false
-      },
-      {
-          "_id": ObjectId("65557277c135b4bfe5ea0931"),
-        "CustomerID": "000000000000000000000003",
-        "BookingDate": "2023-11-16",
-        "CarTypeID": "000000000000000000000001",
-        "CompleteDate": "2998-12-31T17:00:00.000Z",
-        "BookingStatusID": "000000000000000000000004",
-        "StartLong": "106.6990189",
-        "StartLat": "10.7797855",
-        "StartAddress": "Nhà thờ Đức Bà, Công xã Paris, Bến Nghé, District 1, Ho Chi Minh City, Vietnam",
-        "StartPlaceID": "ChIJUSTY5jcvdTERRVvtbJNZT-g",
-        "EndLong": "106.7052906",
-        "EndLat": "10.7875434",
-        "EndAddress": "Thảo Cầm Viên Sài Gòn, Nguyễn Bỉnh Khiêm, Bến Nghé, District 1, Ho Chi Minh City, Vietnam",
-        "EndPlaceID": "ChIJx7wwM0svdTERjuH2a9dkuU0",
-        "Distance": "1.2 km",
-        "Price": "13200",
-        "Duration": "5 mins",
-        "MakerAccountID": "000000000000000000000004",
-        "Note": "Customer phone number: 0765000003\r\nEstimated distance: 1.2 km\r\nEstimated duration: 5 mins\r\nPrice: 13200 vnđ",
-        "Deleted": false
-    },
-    {
-        "_id": ObjectId("65557295c135b4bfe5ea0932"),
-        "CustomerID": "000000000000000000000005",
-        "BookingDate": "2023-11-16T01:38:29.909Z",
-        "CarTypeID": "000000000000000000000002",
-        "CompleteDate": "2998-12-31T17:00:00.000Z",
-        "BookingStatusID": "000000000000000000000005",
-        "StartLong": "106.653277",
-        "StartLat": "10.7861046",
-        "StartAddress": "Chợ Tân Bình, Lý Thường Kiệt, Phường 8, Tân Bình, Ho Chi Minh City, Vietnam",
-        "StartPlaceID": "ChIJNbFrArYudTERGDWm6bnB-uM",
-        "EndLong": "106.7069114",
-        "EndLat": "10.7736136",
-        "EndAddress": "Bến Bạch Đằng, Đường Tôn Đức Thắng, Bến Nghé, District 1, Ho Chi Minh City, Vietnam",
-        "EndPlaceID": "ChIJCRuwB0QvdTER4f_uFnGCDnY",
-        "Distance": "9.5 km",
-        "Price": "118750",
-        "Duration": "24 mins",
-        "MakerAccountID": "000000000000000000000004",
-        "Note": "Customer phone number: 0765000002\r\nEstimated distance: 9.5 km\r\nEstimated duration: 24 mins\r\nPrice: 118750 vnđ",
-        "Deleted": false
-      }
+    }
 ])
+
+db.DocumentationImage.insertMany([
+    {
+        "_id": ObjectId("655d70a77e50c604999be577"),
+        "DriverID": "000000000000000000000010",
+        "Image": "655d70a77e50c604999be577.jpg"
+    },
+    {
+        "_id": ObjectId("655d70a77e50c604999be578"),
+        "DriverID": "000000000000000000000010",
+        "Image": "655d70a77e50c604999be578.jpg"
+    },
+    {
+        "_id": ObjectId("655d70a77e50c604999be579"),
+        "DriverID": "000000000000000000000001",
+        "Image": "655d70a77e50c604999be577.jpg"
+    },
+    {
+        "_id": ObjectId("655d70a77e50c604999be580"),
+        "DriverID": "000000000000000000000001",
+        "Image": "655d70a77e50c604999be578.jpg"
+    }
+])
+    
 

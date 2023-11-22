@@ -35,7 +35,7 @@ namespace bookingtaxi_backend.Hub
             var culture = new CultureInfo("vi-VN");
 
             await Groups.AddToGroupAsync(ConnectionId, groupName);
-            await Clients.Caller.ReceivedMessage($"User {ConnectionId} added to group {groupName}", localDate.ToString(culture));
+            //await Clients.Caller.ReceivedMessage($"User {ConnectionId} added to group {groupName}", localDate.ToString(culture));
         }
 
         public async Task RemovePersonFromGroup(string ConnectionId, string groupName)
@@ -52,7 +52,7 @@ namespace bookingtaxi_backend.Hub
             DateTime localDate = DateTime.Now;
             var culture = new CultureInfo("vi-VN");
             await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
-            await Clients.Group(groupName).ReceivedMessage($"{username} is added to group chat {groupName}", localDate.ToString(culture));
+            //await Clients.Group(groupName).ReceivedMessage($"{username} is added to group chat {groupName}", localDate.ToString(culture));
         }
 
         public async Task RemoveMeFromGroup(string groupName, string username)
@@ -63,7 +63,7 @@ namespace bookingtaxi_backend.Hub
 
         public override async Task OnConnectedAsync()
         {
-            await Clients.Caller.ReceivedMessage($"You are connected to the server! ConnectionId: {Context.ConnectionId}");
+            //await Clients.Caller.ReceivedMessage($"You are connected to the server! ConnectionId: {Context.ConnectionId}");
             await base.OnConnectedAsync();
         }
 
